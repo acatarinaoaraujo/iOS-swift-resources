@@ -186,6 +186,80 @@
     // Cut with trailing closure
     calculator(n1: 2, n2: 3) {$0 * $1}
 
+// 14. Internal and External Parameter Names
+
+    func myFunc(external internal: Type) {
+        // use internal
+    }
+    myFunc(external: value)  
+
+    // To omit the external value   
+    func myFunc(_ internal: Type) {}
+
+    myFunc(value)    
+
+// 15. Extensions and Default Implementations for Protocols
+
+    extension Double {
+
+        func round(to places: Int) -> Double {
+            let precision = pow(10, Double(places))
+            var n = self
+            n = n * precision
+            n.round()
+            n = n / precision
+            return n
+        }
+    }   
+
+    var myDoule = 3.14159
+    myDouble.round(to: 1)    
+
+// 16. Casting
+
+    // as! 
+    let messageCell = cell as! messageCell               // forced downcast
+
+    // as
+    let newCell = messageCell as UITableViewCell        // upcast
+
+    // as? - only do the casting if it is possible
+    if let messageCell = cell as? messageCell {}
+
+    /* Any: All objects
+       AnyObject: Objects derived from classes
+       NSObject: Foundation objects, NSString NSNum ...
+     */
+
+// 17. Singleton
+
+    /* It does not matter how many constants or variables points towards the singleton.
+       It always is going to be the same copy. Example: */
+
+    class Car {
+        var colour = "Red"
+    }
+
+    let myCar = Car()
+    myCar.colour = "Blue"
+
+    let yourCar = Car()
+    yourCar.colour                              // prints Red
+
+    class Car2 {
+        var colour = "Red"
+
+        static let singletonCar = Car()
+    }
+
+    let myCar2 = Car.singletonCar
+    myCar2.colour = "Blue"
+    
+    let youCar2 = Car.singletonCar
+    yourCar2.color                              // prints Blue
+
+
+
 
 
 
