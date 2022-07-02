@@ -82,9 +82,64 @@
 
 // 9. Immutability
     /* In order to modify any properties within the struct, 'mutating' must be added. */
+
     struct Town {
         // [...]
         mutating func harvestRice() {
             citizens.append("Jason")
         }
     }
+
+// 10. Structs vs Classes
+
+    /* Structs cannot inherit, while subclasses can inherit from superclasses.
+       Structs are immutable, classes are mutable (does not need to specify 'mutation' in a function).
+       Structs are passed by value, creates a new object. Classes are passed by reference. Thus, you
+       create another reference to the same object. Ex:
+       
+       let a = Enemy(health: 100, attackStrength: 10)
+       let b = a                                               [points to the same object]
+       a.takeDamage(amount: 10)                                [changes for b as well]
+
+       correct way:
+       let a = Enemy(health: 100, attackStrength: 10)
+       let b = Enemy(health: 100, attackStrength: 10)   
+
+       When to use? Always use Struct, but if you need inheritance or Object-C code, use Classes.                                 
+     */
+
+  // 11. Optional Binding, Chaining, and Nil Coalescing Operator
+
+    var optional : String? = nul
+    val defaultValue = 0
+
+    // Force Unwrapping 
+    optional!
+
+    // Check for nil value 
+    if optional != nil {
+            optional!
+    }
+
+    // Optional Binding:
+    if let safeOptional = optional {
+            safeOptional
+    }
+
+    // Nil Coalescing Operator
+    optional ?? defaultValue
+
+    // Optional Chaining:
+    optional?.property
+    optional?.method()
+    
+        
+// 12. Protocols
+
+    // Defininf the Protocol
+
+    // Adopting the Protocol
+
+    
+
+
