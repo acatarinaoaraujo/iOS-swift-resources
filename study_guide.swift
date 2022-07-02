@@ -136,10 +136,62 @@
         
 // 12. Protocols
 
-    // Defininf the Protocol
+    // Defining the Protocol
+    protocol MyProtocol {
+        // define requirements, must be implemented by the adopter
+    }
 
     // Adopting the Protocol
+    struct MyStruct: MyProtocol {}
+    class MyClass: MyProtocol {}
 
-    
+    // Adopting superclasses and protocols
+    class MyClass: Superclass, FirstProtocol, SecondProtocol {/*[...]*/}
+
+// 13. Closures
+
+    func sum (firstNumber : Int, secondNumber : Int) -> Int {
+        return firstNumber + secondNumber
+    }
+
+    // Anonymous functions without a name. Example: 
+    { (firstNumber : Int, secondNumber : Int) -> Int in
+        return firstNumber + secondNumber
+    }
+
+    // Example 2: 
+    import UIKit
+
+    func calculator (n1: Int, n2: Int, operation: (Int, Int) -> Int) -> Int {
+        return operation(n1, n2)
+    }
+
+    func multiply (no1: Int, no2: Int) -> Int {
+        retunr no1 * no2
+    }
+
+    calculator(n1: 2, n2: 3, operation: multiply)
+
+    // Convert to closure
+    calculator(n1: 2, n2: 3, operation: {(no1: Int, no2: Int) -> Int in
+        return no1 * no2
+    })
+
+    // Cut further due to type inferance 
+    calculator(n1: 2, n2: 3, operation: {(no1, no2) in no1 * no2})
+
+    // Cut even further due to anonymous parameter names
+    calculator(n1: 2, n2: 3, operation: {$0 * $1})
+
+    // Cut with trailing closure
+    calculator(n1: 2, n2: 3) {$0 * $1}
+
+
+
+
+
+
+
+
 
 
