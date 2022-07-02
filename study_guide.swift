@@ -95,7 +95,8 @@
     /* Structs cannot inherit, while subclasses can inherit from superclasses.
        Structs are immutable, classes are mutable (does not need to specify 'mutation' in a function).
        Structs are passed by value, creates a new object. Classes are passed by reference. Thus, you
-       create another reference to the same object. Ex:
+       Structs live on a Stack, Classes in a Heap.
+       Classes create another reference to the same object. Ex:
        
        let a = Enemy(health: 100, attackStrength: 10)
        let b = a                                               [points to the same object]
@@ -105,7 +106,9 @@
        let a = Enemy(health: 100, attackStrength: 10)
        let b = Enemy(health: 100, attackStrength: 10)   
 
-       When to use? Always use Struct, but if you need inheritance or Object-C code, use Classes.                                 
+       When to use?
+       Structs: Simpler, faster, deep copies, true immutability, no memory leaks, threadsafe.
+       Classes: Has inheritance, works with objetive-C code.                            
      */
 
   // 11. Optional Binding, Chaining, and Nil Coalescing Operator
@@ -257,6 +260,80 @@
     
     let youCar2 = Car.singletonCar
     yourCar2.color                              // prints Blue
+
+// 18. Getter and Setters, and Computed Properties
+
+    import Foundation
+
+    let pizzaInInches: Int = 16
+    var numberOfPeople: Int = 12
+    let slicesPerPerson: Int = 4
+
+    var numberOfSlices: Int {
+        get {
+            return pizzaInInches - 4
+        }
+    }
+
+    var numberOfPizza: Int {
+        get {
+            let peopleFedPerPizza = numberOfSlices / slicesPerPerson
+            return numberOfPeople / peopleFedPerPizza
+        }
+        set {
+            let totalSlices = numberOfSlices * newValue
+            numberOfPeople = totalSlices / slicesPerPerson
+        }
+    }
+
+    numberOfPizza = 6
+    print(numberOfPeople)
+
+    // Example 2
+
+    var width: Float = 3.4
+    var height: Float = 2.1
+
+    var bucketOfPaint: Int {
+        get {
+            let area = width * height
+            let areaCoveredPerBucket: Float = 1.5
+            let numberOfBuckets = area / areaCoveredPerBucket
+            let roundedBuckets = ceil(numberOfBuckets)
+            return Int(roundedBuckets)
+        }
+        set {
+            let areaCanCover = Double(newValue) * 1.5
+            print("This amount of paint can cover an area of \(areaCanCover)")
+        }
+    }
+
+    bucketOfPaint = 8
+
+// 19. Observed Properties
+
+    var pizzaInInches: Int = 10 {
+        willSet {
+        }
+        didSet {
+            if pizzaInInches >= 18 {
+                print("Invalid szie, set to 18")
+                pizzaInInches = 18
+            }
+        }
+    }
+
+    pizzaInInches = 33
+    print(pizzaInInches)
+
+// 20. Truples
+
+    let touple1 = ("Angela", 12)
+    let touple2 = (name: "Catarina", age: 12)
+    let touple3: (name: String, age: Int)
+    touple3 = (name: "Catarina", age: 21)
+
+
 
 
 
